@@ -6,27 +6,22 @@
 
 {% load static %} <!-- This method of serving images is for dev only! -->
 
+
+    <h2 style="color: green;">{{ title }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form|materializecss }}
+        <br>
+        <br>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
     
-    <table>
-    
-        <thead>
-            <tr>
-                {% for field in form  %}
-                    <th>{{ field.label_tag }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        
-        <tbody>
-            <tr>
-                {% for field in form  %}
-                    <td>{{ field|materializecss }}</td>
-                {% endfor %}
-            </tr>
-        </tbody>
-    
-    </table>
-    
+    <br>
+    <br>
+
 
 {% endblock %}
 
