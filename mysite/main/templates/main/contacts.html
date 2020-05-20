@@ -6,7 +6,8 @@
 
 {% load static %} <!-- This method of serving images is for dev only! -->
 
-    
+
+
     <table class="highlight">
         
 
@@ -22,18 +23,14 @@
         <tbody>
             {% for form in formset %}
                 <tr>
-                    <form action="#" method="post">
-                        {% for field in form %}
-                            <td>{{ field|materializecss }}</td>
-                        {% endfor %}
-                        <input type="submit" value="OK">
-                    </form>
+                    {% for field in form %}
+                        <td>{{ field|materializecss }}</td>
+                    {% endfor %}
                 </tr>
             {% endfor %}
         
         </tbody>
     </table>
-    
 
 {% endblock %}
 
