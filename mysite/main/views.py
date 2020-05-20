@@ -22,6 +22,12 @@ def new_contact(request):
 
 
 def contacts(request):
+    
+    # For field headings in template
+    contact_fields = [f.name for f in Contact._meta.get_fields()]
+    contact_fields.remove("id")
+    contact_fields.remove("last_updated")
+    
     contacts = Contact.objects.all()
     data = []
     for contact in contacts:
@@ -35,6 +41,7 @@ def contacts(request):
     return render(
         request=request,
         template_name="main/contacts.html",
-        context={"formset": formset},
+        context={"formset": formset,
+                 "contact_fields": contact_fields},
         )
     

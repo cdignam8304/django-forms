@@ -7,12 +7,14 @@
 {% load static %} <!-- This method of serving images is for dev only! -->
 
     
-    <table>
+    <table class="highlight">
         
 
         <thead>
             <tr>
-                <th></th>
+                {% for fieldname in contact_fields %}
+                    <th>{{ fieldname }}</th>
+                {% endfor %}
             </tr>
         </thead>
 
@@ -20,9 +22,12 @@
         <tbody>
             {% for form in formset %}
                 <tr>
-                    {% for field in form %}
-                        <td>{{ field|materializecss }}</td>
-                    {% endfor %}
+                    <form action="#" method="post">
+                        {% for field in form %}
+                            <td>{{ field|materializecss }}</td>
+                        {% endfor %}
+                        <input type="submit" value="OK">
+                    </form>
                 </tr>
             {% endfor %}
         
