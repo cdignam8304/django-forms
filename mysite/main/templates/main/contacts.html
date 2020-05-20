@@ -1,0 +1,34 @@
+{% extends 'main/header.html' %}
+
+{% load materializecss %}
+
+{% block content %}
+
+{% load static %} <!-- This method of serving images is for dev only! -->
+
+    
+    <table>
+        
+
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+
+    
+        <tbody>
+            {% for form in formset %}
+                <tr>
+                    {% for field in form %}
+                        <td>{{ field|materializecss }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+    
+
+{% endblock %}
+
