@@ -39,6 +39,7 @@ def contacts(request):
     contact_fields = [f.name for f in Contact._meta.get_fields()]
     contact_fields.remove("id")
     contact_fields.remove("last_updated")
+    contact_fields.remove("created_at")
     
     contacts = Contact.objects.all()
     data = []

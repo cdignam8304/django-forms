@@ -12,5 +12,6 @@ class Contact_Form(forms.ModelForm):
             "email",
             "city",
             "dob",
+            "contact_type",
             "is_active",
             ]
