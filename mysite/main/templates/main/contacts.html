@@ -24,7 +24,8 @@
             {% for form in formset %}
                 <tr>
                     {% for field in form %}
-                        <td>{{ field|materializecss }}</td> <!-- date picker doesn't show current value -->
+                        <!-- <td>{{ field|materializecss }}</td> --> <!-- date picker doesn't show current value -->
+                        <td>{{ field }}</td>
                         <!-- <td>{{ field.value }}</td> -->
                     {% endfor %}
                 </tr>

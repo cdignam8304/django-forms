@@ -11,20 +11,9 @@
 
     <form method="post">
         {% csrf_token %}
-        <!-- {{ form|materializecss }} -->
+        {{ form|materializecss }}
         <br>
-        <br>
-        {% for field in form %}
-            <!-- {{ field|materializecss }} -->
-        <!-- {{ field.name }} -->
-        
-            {% if field.name == "dob" %}
-                <input type="text" name="dob" id="dob" class="date" >
-            {% else %}
-                {{field|materializecss}}
-            {% endif %}
-        {% endfor %}
-        
+        <br>       
         <button class="btn waves-effect waves-light" type="submit" name="action">Save
             <i class="material-icons right">save</i>
         </button>

@@ -22,5 +22,5 @@ urlpatterns = [
     path("", views.homepage, name="homepage"),
     path("new_contact/", views.new_contact, name="new_contact"),
     path("contacts/", views.contacts, name="contacts"),
-    path("edit_contacts/", views.edit_contacts, name="edit_contacts"),
+    path("edit_contact/<id>/", views.edit_contact, name="edit_contact"),
 ]

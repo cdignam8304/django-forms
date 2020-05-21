@@ -25,6 +25,9 @@ def new_contact(request):
         contact_name = f"{form.cleaned_data.get('first_name')} {form.cleaned_data.get('last_name')}"
         messages.success(request, f"New Contact Created: {contact_name}")
         form = Contact_Form()
+    else:
+        for msg in form.errors:
+            messages.error(request, f"{msg}: {form.errors[msg]}")
     
     context = {
             "form": form,
@@ -33,11 +36,32 @@ def new_contact(request):
     return render(request, "main/new_contact.html", context)
 
 
+def edit_contact(request, id):
+    title = "Edit Contact"
+    contact_id = Contact.objects.get(id=id)
+    form = Contact_Form(request.POST or None, instance=contact_id)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        contact_name = f"{form.cleaned_data.get('first_name')} {form.cleaned_data.get('last_name')}"
+        messages.success(request, f"Contact updated: {contact_name}")
+        # form = Contact_Form()
+    else:
+        for msg in form.errors:
+            messages.error(request, f"{msg}: {form.errors[msg]}")
+    
+    context = {
+            "form": form,
+            "title": title,
+        }
+    return render(request, "main/edit_contact.html", context)
+
+
 def contacts(request):
     
     # For field headings in template
     contact_fields = [f.name for f in Contact._meta.get_fields()]
-    contact_fields.remove("id")
+    # contact_fields.remove("id")
     contact_fields.remove("last_updated")
     contact_fields.remove("created_at")
     
@@ -46,7 +70,7 @@ def contacts(request):
     for contact in contacts:
         contact_dict = contact.__dict__
         # del contact_dict[""]
-        del contact_dict["id"]
+        # del contact_dict["id"]
         data.append(contact_dict)
     ContactFormSet = formset_factory(Contact_Form, extra=0)
     formset = ContactFormSet(initial=data)
@@ -59,10 +83,6 @@ def contacts(request):
         )
 
 
-def edit_contacts(request):
-    context = {}
-    return render(request=request,
-                  template_name="main/edit_contacts.html",
-                  context=context)
+
 
 
