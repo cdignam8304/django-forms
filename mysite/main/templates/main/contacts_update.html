@@ -1,5 +1,6 @@
 {% extends 'main/header.html' %}
 
+{% load materializecss %}
 
 {% block content %}
 
@@ -7,13 +8,11 @@
 
 
     <h2 style="color: green; text-align: center;">{{ title }}</h2>
-
+     
     
     <form method="post">{% csrf_token %}
         {{ formset.management_form }}
         
-        
-            
             
         <table>
         
@@ -28,23 +27,27 @@
             <tbody>
                 {% for form in formset %}
                     <tr>
-                        {% for field in form %}
-                            <td>{{ field }}</td>
+                        {% for field in form %}                                
+                            {% if field.name == "dob" or "id" %}
+                                <td>{{ field }}</td>
+                            {% else %}
+                                <td>{{ field|materializecss }}</td>
+                            {% endif %}                            
                         {% endfor %}
                     </tr>
                 {% endfor %}
             </tbody>
         
         </table>
-  
+        
         <br>
         <br>
         <br>
-            
         
         <button class="btn waves-effect waves-light" type="submit" name="action">Save
             <i class="material-icons right">save</i>
         </button>
+    
     </form>
     
     <br>

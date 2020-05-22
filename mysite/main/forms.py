@@ -13,5 +13,6 @@ class Contact_Form(forms.ModelForm):
             "city",
             "dob",
             "contact_type",
+            "mktg_opt_in",
             "is_active",
             ]

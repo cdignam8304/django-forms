@@ -60,10 +60,10 @@ def edit_contact(request, id):
 def contacts(request):
     
     # For field headings in template
-    contact_fields = [f.name for f in Contact._meta.get_fields()]
+    contact_fields = [f.verbose_name for f in Contact._meta.get_fields()]
     # contact_fields.remove("id")
-    contact_fields.remove("last_updated")
-    contact_fields.remove("created_at")
+    contact_fields.remove("Updated")
+    contact_fields.remove("Created")
     
     contacts = Contact.objects.all()
     data = []
@@ -87,10 +87,10 @@ def contacts_update(request):
     title = "Update Contacts"
     
     # For field headings in template
-    contact_fields = [f.name for f in Contact._meta.get_fields()]
-    contact_fields.remove("id")
-    contact_fields.remove("last_updated")
-    contact_fields.remove("created_at")
+    contact_fields = [f.verbose_name for f in Contact._meta.get_fields()]
+    contact_fields.remove("ID")
+    contact_fields.remove("updated")
+    contact_fields.remove("created")
     
     ContactFormset = modelformset_factory(model=Contact, form=Contact_Form, extra=0)
     formset = ContactFormset(request.POST or None)
@@ -103,7 +103,7 @@ def contacts_update(request):
         messages.success(request, f"Contacts updated")
     else:
         if request.POST: # So don't get error when first load page (GET request)
-            messages.error(request, "Could not save contacts!")
+            messages.error(request, formset.errors)
         
     context = {
             "formset": formset,
