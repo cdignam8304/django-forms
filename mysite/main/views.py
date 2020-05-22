@@ -83,6 +83,32 @@ def contacts(request):
         )
 
 
-
-
+def contacts_update(request):
+    title = "Update Contacts"
+    
+    # For field headings in template
+    contact_fields = [f.name for f in Contact._meta.get_fields()]
+    contact_fields.remove("id")
+    contact_fields.remove("last_updated")
+    contact_fields.remove("created_at")
+    
+    ContactFormset = modelformset_factory(model=Contact, form=Contact_Form, extra=0)
+    formset = ContactFormset(request.POST or None)
+    if formset.is_valid():
+        instances = formset.save(commit=False)
+        
+        for instance in instances:
+            instance.save()
+        
+        messages.success(request, f"Contacts updated")
+    else:
+        if request.POST: # So don't get error when first load page (GET request)
+            messages.error(request, "Could not save contacts!")
+        
+    context = {
+            "formset": formset,
+            "title": title,
+            "contact_fields": contact_fields,
+        }
+    return render(request, "main/contacts_update.html", context)
 

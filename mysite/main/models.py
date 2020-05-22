@@ -20,6 +20,13 @@ class ContactType(models.Model):
 
 class Contact(models.Model):
     
+    ACTIVE = 'ACTIVE'
+    INACTIVE = 'INACTIVE'
+    STATUS = [
+        (ACTIVE, 'Active'),
+        (INACTIVE, 'Inactive'),
+    ]
+    
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
@@ -28,8 +35,8 @@ class Contact(models.Model):
     contact_type = models.ForeignKey(ContactType,
                                     default=1,
                                     verbose_name="Contact Type",
-                                    on_delete=models.SET_DEFAULT)
-    is_active = models.BooleanField(null=False, default=True)
+                                    on_delete=models.SET_DEFAULT)    
+    is_active = models.CharField(max_length=8, choices=STATUS, default=ACTIVE)
     created_at = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
     

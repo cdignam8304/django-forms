@@ -1,0 +1,54 @@
+{% extends 'main/header.html' %}
+
+
+{% block content %}
+
+{% load static %} <!-- This method of serving images is for dev only! -->
+
+
+    <h2 style="color: green; text-align: center;">{{ title }}</h2>
+
+    
+    <form method="post">{% csrf_token %}
+        {{ formset.management_form }}
+        
+        
+            
+            
+        <table>
+        
+            <thead>
+                <tr>
+                    {% for name in contact_fields %}
+                        <th>{{ name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+        
+            <tbody>
+                {% for form in formset %}
+                    <tr>
+                        {% for field in form %}
+                            <td>{{ field }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        
+        </table>
+  
+        <br>
+        <br>
+        <br>
+            
+        
+        <button class="btn waves-effect waves-light" type="submit" name="action">Save
+            <i class="material-icons right">save</i>
+        </button>
+    </form>
+    
+    <br>
+    <br>
+    
+{% endblock %}
+
