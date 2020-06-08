@@ -20,6 +20,7 @@ app_name = "main" # used for creating custom urls, so don't have to hard code ur
 
 urlpatterns = [
     path("", views.homepage, name="homepage"),
+    path("contact_list/", views.contact_list, name="contact_list"),
     path("new_contact/", views.new_contact, name="new_contact"),
     path("contacts/", views.contacts, name="contacts"),
     path("edit_contact/<id>/", views.edit_contact, name="edit_contact"),

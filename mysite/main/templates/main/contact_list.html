@@ -1,0 +1,16 @@
+{% extends 'main/header.html' %}
+
+
+{% block content %}
+
+{% load static %} <!-- This method of serving images is for dev only! -->
+
+
+{% for contact in contacts %}
+
+    <p>{{contact}}</p>
+
+{% endfor %}
+    
+{% endblock %}
+
