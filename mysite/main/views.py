@@ -10,9 +10,18 @@ from django.contrib import messages
 # Create your views here.
 
 def homepage(request):
-    contacts = Contact.objects.all()
+    context = {}
+    title = "Carousel slider with autoplay"
+    context["title"] = title
     return render(request=request,
                   template_name="main/homepage.html",
+                  context=context)
+
+
+def contact_list(request):
+    contacts = Contact.objects.all()
+    return render(request=request,
+                  template_name="main/contact_list.html",
                   context={"contacts": contacts})
 
 

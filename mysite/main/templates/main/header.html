@@ -58,4 +58,38 @@
 <!-- Not currently using -->
 <!-- <script src="{% static 'tinymce/js/prism.js' %}"></script> -->
 
-<script>M.AutoInit();</script> <!-- This initializes all materialize javascript -->
+<script>
+    <!-- M.AutoInit(); --> <!-- This initializes all materialize javascript with basic settings -->
+    
+    
+    <!-- initialize carousel with plain js -->
+    <!--
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.carousel');
+        var options = {'numVisible': 5};
+        var instances = M.Carousel.init(elems, options);
+    });
+    -->
+    
+    <!-- initialize carousel with jquery -->
+    
+    $('.carousel.carousel-slider').carousel({
+        fullWidth: true,
+        indicators: true,
+    });
+    
+    autoplay();
+    function autoplay() {
+        $('.carousel.carousel-slider').carousel('next');
+        setTimeout(autoplay, 8000);
+    }
+    
+    
+    
+</script> 
+
+
+
+
+
+
